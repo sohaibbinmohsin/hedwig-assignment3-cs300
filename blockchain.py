@@ -25,7 +25,11 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
-        block.hash_previous_block = self.get_hash_last_block()
+        if len(self.blocks) > 0:
+            block.hash_previous_block = hash_sha256(str(self.blocks[-1]).encode('utf-8'))
+        else:
+            block.hash_previous_block = None
+        
         block.delivery.id = len(self.blocks)
         
         counter = 0
@@ -51,8 +55,8 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
-        if len(self.blocks) > 0:
-            hash_prev_block = self.blocks[-1].self.hash_previous_block
+        # if len(self.blocks) > 0:
+        #     hash_prev_block = self.blocks[-1].self.hash_previous_block
             
         """""""""""""""""""""
         YOUR CODE ENDS HERE
