@@ -25,7 +25,13 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
+        block.hash_previous_block = self.get_hash_last_block()
+        block.delivery.id = len(self.blocks)
         
+        counter = 0
+        for msg in block.delivery.created_msgs:
+            msg.id = MsgId(counter, len(self.blocks))
+            counter += 1
 
         """""""""""""""""""""
         YOUR CODE ENDS HERE
@@ -45,7 +51,9 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
-       
+        if len(self.blocks) > 0:
+            hash_prev_block = self.blocks[-1].self.hash_previous_block
+            
         """""""""""""""""""""
         YOUR CODE ENDS HERE
         """""""""""""""""""""
