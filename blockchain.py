@@ -25,16 +25,15 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
-        if len(self.blocks) > 0:
-            block.hash_previous_block = hash_sha256(str(self.blocks[-1]).encode('utf-8'))
-        else:
-            block.hash_previous_block = None
         
-        block.delivery.id = len(self.blocks)
+        block.hash_previous_block = self.get_hash_last_block()
+        
+        Id = len(self.blocks)
+        block.delivery.id = Id
         
         counter = 0
         for msg in block.delivery.created_msgs:
-            msg.id = MsgId(counter, len(self.blocks))
+            msg.id = MsgId(counter, Id)
             counter += 1
 
         """""""""""""""""""""
@@ -55,8 +54,12 @@ class Blockchain():
         """""""""""""""""""""
         YOUR CODE STARTS HERE
         """""""""""""""""""""
-        # if len(self.blocks) > 0:
-        #     hash_prev_block = self.blocks[-1].self.hash_previous_block
+        if len(self.blocks) < 1:
+            return False
+        
+        for i in range(len(self.blocks-1), 0, -1):
+            if(self.blocks[i].hash_previous_block != hash_sha256(str(self.blocks[i-1]).encode('utf-8'))):
+                return False
             
         """""""""""""""""""""
         YOUR CODE ENDS HERE
@@ -99,7 +102,7 @@ class Blockchain():
         """
         blocks = self.blocks
         if len(blocks) > 0:
-            return hash_sha256(blocks[-1])
+            return hash_sha256(str(blocks[-1]).encode('utf-8'))
         else:
             return None
 
